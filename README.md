@@ -13,4 +13,4 @@ Este branch contém a implementação inicial do sistema de Caixa Eletrónico ut
 1. Certifique-se de ter o Python 3.x instalado.
 2. No terminal, execute o controlador:
    ```bash
-   python controller.py
+   python3 main.py
