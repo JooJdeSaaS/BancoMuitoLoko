@@ -7,10 +7,6 @@ from use_cases import RealizarOperacaoUseCase
 class TestOperacoesBancarias(unittest.TestCase):
 
     def setUp(self):
-        """
-        Prepara o ambiente para cada teste.
-        O repositório mockado e o caso de uso são comuns a ambos os cenários.
-        """
         self.repositorio_mock = MagicMock()
         self.use_case = RealizarOperacaoUseCase(self.repositorio_mock)
 
