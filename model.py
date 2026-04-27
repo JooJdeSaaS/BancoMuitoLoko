@@ -7,11 +7,10 @@ class Conta:
     def __init__(self, cliente, saldo_inicial):
         self.cliente = cliente
         self.saldo = saldo_inicial
-        # Simulação de um número de conta gerado
-        self.numero_conta = "001-" + str(cpf[-3:])
+        # O erro estava aqui: precisamos acessar o atributo cpf do objeto cliente
+        self.numero_conta = "001-" + str(cliente.cpf[-3:])
 
 class BancoDados:
-    """Simulação de um banco de dados persistente em memória."""
     def __init__(self):
         self.contas = []
 

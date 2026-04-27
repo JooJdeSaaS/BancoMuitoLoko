@@ -1,20 +1,29 @@
-class Cliente:
-    def __init__(self, nome, cpf):
-        self.nome = nome
-        self.cpf = cpf
+import os
 
-class Conta:
-    def __init__(self, cliente, saldo_inicial):
-        self.cliente = cliente
-        self.saldo = saldo_inicial
-        # Simulação de um número de conta gerado
-        self.numero_conta = "001-" + str(cpf[-3:])
+class BancoView:
+    def exibir_menu_inicial(self):
+        # Esta linha abaixo precisa de 8 espaços de recuo (4 da classe + 4 da função)
+        print("\n" + "=" * 30)
+        print("      CAIXA ELETRÔNICO      ")
+        print("=" * 30)
+        print("CADASTRO DE NOVA CONTA")
 
-class BancoDados:
-    """Simulação de um banco de dados persistente em memória."""
-    def __init__(self):
-        self.contas = []
+        nome = input("Nome do Titular: ")
+        cpf = input("CPF: ")
+        try:
+            saldo = float(input("Saldo Inicial: R$ "))
+        except ValueError:
+            print("Valor inválido! Definindo saldo como R$ 0.00")
+            saldo = 0.0
 
-    def salvar_conta(self, conta):
-        self.contas.append(conta)
-        return True
+        return nome, cpf, saldo
+
+    def mostrar_conta_criada(self, conta):
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("\n" + "Check-out de Cadastro".center(30, "-"))
+        print(f"Titular: {conta.cliente.nome}")
+        print(f"CPF:     {conta.cliente.cpf}")
+        print(f"Conta:   {conta.numero_conta}")
+        print(f"Saldo:   R$ {conta.saldo:.2f}")
+        print("-" * 30)
+        print("Conta cadastrada com sucesso!")
