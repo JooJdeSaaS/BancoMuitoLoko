@@ -2,7 +2,6 @@ import os
 
 class BancoView:
     def exibir_menu_inicial(self):
-        # Esta linha abaixo precisa de 8 espaços de recuo (4 da classe + 4 da função)
         print("\n" + "=" * 30)
         print("      CAIXA ELETRÔNICO      ")
         print("=" * 30)
