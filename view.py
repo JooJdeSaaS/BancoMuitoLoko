@@ -9,7 +9,8 @@ class BancoView:
         print("2. Depósito")
         print("3. Saque")
         print("4. Extrato")
-        print("5. Sair")
+        print("5. Render Poupança") # Nova opção
+        print("6. Sair")
         return input("\nEscolha uma opção: ")
 
     def tela_cadastro(self):

@@ -12,7 +12,8 @@ class BancoController:
             "2": self._executar_deposito,
             "3": self._executar_saque,
             "4": self._executar_extrato,
-            "5": self._executar_sair
+            "5": self._executar_investimento,  # Nova opção
+            "6": self._executar_sair
         }
 
     def _executar_cadastro(self):
@@ -41,6 +42,11 @@ class BancoController:
             self.view.mostrar_extrato(conta)
         else:
             self.view.mostrar_mensagem("Erro: Conta não encontrada.")
+
+    def _executar_investimento(self):
+        cpf = self.view.tela_extrato()  # Reutiliza a tela de CPF
+        sucesso, msg = self.uc.investir_poupanca(cpf)
+        self.view.mostrar_mensagem(msg)
 
     def _executar_sair(self):
         self.view.mostrar_mensagem("Encerrando o sistema... Até logo!")

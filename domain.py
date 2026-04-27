@@ -12,6 +12,12 @@ class Conta:
         self.numero_conta = f"001-{cliente.cpf[-3:]}"
         self.historico = historico if historico else [f"Abertura: R$ {saldo:.2f}"]
 
+    def aplicar_rendimento(self, taxa: float):
+        rendimento = self.saldo * taxa
+        self.saldo += rendimento
+        self.historico.append(f"Rendimento Poupança: + R$ {rendimento:.2f}")
+        return rendimento
+
 class IContaRepository(ABC):
     @abstractmethod
     def salvar(self, conta: Conta):
