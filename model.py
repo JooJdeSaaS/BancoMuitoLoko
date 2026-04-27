@@ -7,8 +7,11 @@ class Conta:
     def __init__(self, cliente, saldo_inicial):
         self.cliente = cliente
         self.saldo = saldo_inicial
-        # O erro estava aqui: precisamos acessar o atributo cpf do objeto cliente
         self.numero_conta = "001-" + str(cliente.cpf[-3:])
+        self.historico = [f"Abertura de conta: R$ {saldo_inicial:.2f}"]
+
+    def adicionar_ao_historico(self, mensagem):
+        self.historico.append(mensagem)
 
 class BancoDados:
     def __init__(self):
@@ -16,4 +19,9 @@ class BancoDados:
 
     def salvar_conta(self, conta):
         self.contas.append(conta)
-        return True
+
+    def buscar_conta_por_cpf(self, cpf):
+        for conta in self.contas:
+            if conta.cliente.cpf == cpf:
+                return conta
+        return None

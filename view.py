@@ -1,28 +1,31 @@
 import os
 
 class BancoView:
-    def exibir_menu_inicial(self):
-        print("\n" + "=" * 30)
-        print("      CAIXA ELETRÔNICO      ")
-        print("=" * 30)
-        print("CADASTRO DE NOVA CONTA")
+    def exibir_menu_principal(self):
+        print("\n--- CAIXA ELETRÔNICO ---")
+        print("1. Criar Conta")
+        print("2. Depositar")
+        print("3. Sacar")
+        print("4. Ver Extrato")
+        print("5. Sair")
+        return input("Escolha uma opção: ")
 
-        nome = input("Nome do Titular: ")
+    def solicitar_dados_cadastro(self):
+        nome = input("Nome: ")
         cpf = input("CPF: ")
-        try:
-            saldo = float(input("Saldo Inicial: R$ "))
-        except ValueError:
-            print("Valor inválido! Definindo saldo como R$ 0.00")
-            saldo = 0.0
-
+        saldo = float(input("Saldo Inicial: "))
         return nome, cpf, saldo
 
-    def mostrar_conta_criada(self, conta):
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print("\n" + "Check-out de Cadastro".center(30, "-"))
-        print(f"Titular: {conta.cliente.nome}")
-        print(f"CPF:     {conta.cliente.cpf}")
-        print(f"Conta:   {conta.numero_conta}")
-        print(f"Saldo:   R$ {conta.saldo:.2f}")
-        print("-" * 30)
-        print("Conta cadastrada com sucesso!")
+    def solicitar_valor(self, operacao):
+        cpf = input("Confirme seu CPF: ")
+        valor = float(input(f"Valor do {operacao}: R$ "))
+        return cpf, valor
+
+    def mostrar_mensagem(self, msg):
+        print(f"\n>>> {msg}")
+
+    def mostrar_extrato(self, historico):
+        print("\n" + " EXTRATO BANCÁRIO ".center(30, "="))
+        for item in historico:
+            print(item)
+        print("="*30)

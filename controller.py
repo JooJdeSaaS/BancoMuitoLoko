@@ -1,25 +1,45 @@
 from model import Cliente, Conta, BancoDados
+from service import BancoService
 from view import BancoView
+
 
 class BancoController:
     def __init__(self):
-        self.model_db = BancoDados()
+        self.db = BancoDados()
+        self.service = BancoService(self.db)
         self.view = BancoView()
 
-    def iniciar_cadastro(self):
-        # 1. Recebe dados da View
-        nome, cpf, saldo = self.view.exibir_menu_inicial()
+    def rodar(self):
+        while True:
+            opcao = self.view.exibir_menu_principal()
 
-        # 2. Instancia as classes do Model
-        novo_cliente = Cliente(nome, cpf)
-        nova_conta = Conta(novo_cliente, saldo)
+            if opcao == "1":
+                nome, cpf, saldo = self.view.solicitar_dados_cadastro()
+                nova_conta = Conta(Cliente(nome, cpf), saldo)
+                self.db.salvar_conta(nova_conta)
+                self.view.mostrar_mensagem("Conta criada!")
 
-        # 3. Salva no "Banco de Dados"
-        self.model_db.salvar_conta(nova_conta)
+            elif opcao == "2":
+                cpf, valor = self.view.solicitar_valor("Depósito")
+                sucesso, msg = self.service.depositar(cpf, valor)
+                self.view.mostrar_mensagem(msg)
 
-        # 4. Comanda a View para exibir o resultado
-        self.view.mostrar_conta_criada(nova_conta)
+            elif opcao == "3":
+                cpf, valor = self.view.solicitar_valor("Saque")
+                sucesso, msg = self.service.sacar(cpf, valor)
+                self.view.mostrar_mensagem(msg)
+
+            elif opcao == "4":
+                cpf = input("Digite o CPF para extrato: ")
+                hist = self.service.obter_extrato(cpf)
+                if hist:
+                    self.view.mostrar_extrato(hist)
+                else:
+                    self.view.mostrar_mensagem("Conta não encontrada.")
+
+            elif opcao == "5":
+                break
+
 
 if __name__ == "__main__":
-    app = BancoController()
-    app.iniciar_cadastro()
+    BancoController().rodar()
