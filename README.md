@@ -1,16 +1,24 @@
-# Sistema Bancário - Branch 1 (MVC Base)
+# Sistema Bancário - Branch 2: Multicamadas & Operações
 
-Este branch contém a implementação inicial do sistema de Caixa Eletrónico utilizando o padrão de arquitetura **MVC (Model-View-Controller)**.
+Esta versão do projeto implementa a lógica financeira de depósitos e saques, utilizando uma **Arquitetura Multicamadas** para separar as regras de negócio da interface.
 
-## 🏗️ Estrutura do Projeto
+## 📁 Organização de Pastas e Camadas
 
-- **Model (`model.py`)**: Define as entidades `Cliente` e `Conta`. Inclui a classe `BancoDados` que simula o armazenamento em memória utilizando listas.
-- **View (`view.py`)**: Gere a interface de utilizador (CLI). Responsável por solicitar inputs (Nome, CPF, Saldo) e formatar a exibição dos dados.
-- **Controller (`controller.py`)**: Atua como mediador, processando a lógica de criação de objetos e coordenando o fluxo entre a View e o Model.
+A estrutura foi desenhada para garantir que cada arquivo tenha uma responsabilidade única:
+
+- **`model.py` (Dados)**: Define as entidades `Cliente`, `Conta` e simula a persistência no `BancoDados`.
+- **`service.py` (Negócios)**: Contém as regras bancárias (ex: validação de saldo para saque).
+- **`view.py` (Interface)**: Gere as entradas e saídas de texto no terminal.
+- **`controller.py` (Controle)**: Orquestra o fluxo de execução entre todas as camadas.
+
+
+
+## 🛠️ Funcionalidades Adicionadas
+- **Depósitos e Saques**: Agora é possível movimentar o saldo da conta.
+- **Histórico/Extrato**: Todas as operações são registradas e podem ser visualizadas.
+- **Validação de Negócio**: O sistema impede saques superiores ao saldo disponível.
 
 ## 🚀 Como Executar
-
-1. Certifique-se de ter o Python 3.x instalado.
-2. No terminal, execute o controlador:
-   ```bash
-   python controller.py
+Sempre inicie o programa pelo controlador:
+```bash
+python3 controller.py
