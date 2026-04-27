@@ -1,45 +1,54 @@
-from model import Cliente, Conta, BancoDados
-from service import BancoService
-from view import BancoView
+import sys
 
 
 class BancoController:
-    def __init__(self):
-        self.db = BancoDados()
-        self.service = BancoService(self.db)
-        self.view = BancoView()
+    def __init__(self, repo, uc, view):
+        self.repo = repo
+        self.uc = uc
+        self.view = view
+
+        self.comandos = {
+            "1": self._executar_cadastro,
+            "2": self._executar_deposito,
+            "3": self._executar_saque,
+            "4": self._executar_extrato,
+            "5": self._executar_sair
+        }
+
+    def _executar_cadastro(self):
+        nome, cpf, saldo = self.view.tela_cadastro()
+
+        from domain import Cliente, Conta
+        nova_conta = Conta(Cliente(nome, cpf), saldo)
+
+        self.repo.salvar(nova_conta)
+        self.view.mostrar_mensagem("Conta criada e salva com sucesso!")
+
+    def _executar_deposito(self):
+        cpf, valor = self.view.tela_operacao("Depósito")
+        sucesso, msg = self.uc.depositar(cpf, valor)
+        self.view.mostrar_mensagem(msg)
+
+    def _executar_saque(self):
+        cpf, valor = self.view.tela_operacao("Saque")
+        sucesso, msg = self.uc.sacar(cpf, valor)
+        self.view.mostrar_mensagem(msg)
+
+    def _executar_extrato(self):
+        cpf = self.view.tela_extrato()
+        conta = self.repo.buscar_por_cpf(cpf)
+        if conta:
+            self.view.mostrar_extrato(conta)
+        else:
+            self.view.mostrar_mensagem("Erro: Conta não encontrada.")
+
+    def _executar_sair(self):
+        self.view.mostrar_mensagem("Encerrando o sistema... Até logo!")
+        sys.exit()
 
     def rodar(self):
         while True:
-            opcao = self.view.exibir_menu_principal()
+            opcao = self.view.exibir_menu()
 
-            if opcao == "1":
-                nome, cpf, saldo = self.view.solicitar_dados_cadastro()
-                nova_conta = Conta(Cliente(nome, cpf), saldo)
-                self.db.salvar_conta(nova_conta)
-                self.view.mostrar_mensagem("Conta criada!")
-
-            elif opcao == "2":
-                cpf, valor = self.view.solicitar_valor("Depósito")
-                sucesso, msg = self.service.depositar(cpf, valor)
-                self.view.mostrar_mensagem(msg)
-
-            elif opcao == "3":
-                cpf, valor = self.view.solicitar_valor("Saque")
-                sucesso, msg = self.service.sacar(cpf, valor)
-                self.view.mostrar_mensagem(msg)
-
-            elif opcao == "4":
-                cpf = input("Digite o CPF para extrato: ")
-                hist = self.service.obter_extrato(cpf)
-                if hist:
-                    self.view.mostrar_extrato(hist)
-                else:
-                    self.view.mostrar_mensagem("Conta não encontrada.")
-
-            elif opcao == "5":
-                break
-
-
-if __name__ == "__main__":
-    BancoController().rodar()
+            acao = self.comandos.get(opcao, lambda: self.view.mostrar_mensagem("Opção Inválida!"))
+            acao()

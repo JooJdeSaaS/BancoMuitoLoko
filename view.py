@@ -1,31 +1,38 @@
 import os
 
 class BancoView:
-    def exibir_menu_principal(self):
-        print("\n--- CAIXA ELETRÔNICO ---")
-        print("1. Criar Conta")
-        print("2. Depositar")
-        print("3. Sacar")
-        print("4. Ver Extrato")
+    def exibir_menu(self):
+        print("\n" + "="*30)
+        print("   CAIXA ELETRÔNICO  ")
+        print("="*30)
+        print("1. Abrir Conta")
+        print("2. Depósito")
+        print("3. Saque")
+        print("4. Extrato")
         print("5. Sair")
-        return input("Escolha uma opção: ")
+        return input("\nEscolha uma opção: ")
 
-    def solicitar_dados_cadastro(self):
-        nome = input("Nome: ")
-        cpf = input("CPF: ")
-        saldo = float(input("Saldo Inicial: "))
+    def tela_cadastro(self):
+        nome = input("Nome do Titular: ")
+        cpf = input("CPF (apenas números): ")
+        saldo = float(input("Saldo Inicial: R$ "))
         return nome, cpf, saldo
 
-    def solicitar_valor(self, operacao):
-        cpf = input("Confirme seu CPF: ")
-        valor = float(input(f"Valor do {operacao}: R$ "))
+    def tela_operacao(self, tipo):
+        cpf = input(f"Confirme o CPF para {tipo}: ")
+        valor = float(input(f"Valor do {tipo}: R$ "))
         return cpf, valor
+
+    def tela_extrato(self):
+        return input("Digite o CPF para ver o extrato: ")
+
+    def mostrar_extrato(self, conta):
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(f"\n--- EXTRATO: {conta.cliente.nome} ---")
+        for h in conta.historico:
+            print(h)
+        print(f"\nSALDO ATUAL: R$ {conta.saldo:.2f}")
+        print("-" * 30)
 
     def mostrar_mensagem(self, msg):
         print(f"\n>>> {msg}")
-
-    def mostrar_extrato(self, historico):
-        print("\n" + " EXTRATO BANCÁRIO ".center(30, "="))
-        for item in historico:
-            print(item)
-        print("="*30)
