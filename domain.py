@@ -18,6 +18,14 @@ class Conta:
         self.historico.append(f"Rendimento Poupança: + R$ {rendimento:.2f}")
         return rendimento
 
+    def investir_poupanca(self, cpf, taxa=0.005):  # Define 0.5% como padrão
+        conta = self.repository.buscar_por_cpf(cpf)
+        if conta:
+            rendimento = conta.aplicar_rendimento(taxa)
+            self.repository.salvar(conta)
+            return True, f"Rendimento de R$ {rendimento:.2f} aplicado!"
+        return False, "Conta não encontrada."
+
 class IContaRepository(ABC):
     @abstractmethod
     def salvar(self, conta: Conta):

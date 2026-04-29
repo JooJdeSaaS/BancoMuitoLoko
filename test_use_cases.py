@@ -56,6 +56,26 @@ class TestOperacoesBancarias(unittest.TestCase):
         self.repositorio_mock.salvar.assert_called_once_with(conta_teste)
         self.assertIn("Saque: - R$ 30.00", conta_teste.historico)
 
+    def test_deve_atualizar_saldo_com_rendimento_padrao_05_por_cento(self):
+        # ARRANGE
+        cliente = Cliente("João de Sá", "12345678900")
+        saldo_inicial = 2000.0
+        conta_teste = Conta(cliente, saldo_inicial)
+        # O rendimento esperado de 0.5% sobre 2000 é 10.0
+        saldo_esperado = 2010.0
+
+        self.repositorio_mock.buscar_por_cpf.return_value = conta_teste
+
+        # ACT
+        # Usando o valor padrão de 0.5%
+        sucesso, mensagem = self.use_case.investir_poupanca("12345678900")
+
+        # ASSERT
+        self.assertTrue(sucesso)
+        self.assertEqual(conta_teste.saldo, saldo_esperado)
+        self.assertIn("Rendimento Poupança: + R$ 10.00", conta_teste.historico)
+        self.repositorio_mock.salvar.assert_called_once_with(conta_teste)
+
 
 if __name__ == "__main__":
     unittest.main()
