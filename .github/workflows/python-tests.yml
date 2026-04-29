@@ -2,9 +2,9 @@ name: Executar Testes Unitarios
 
 on:
   push:
-    branches: [main]
+    branches: [TesteAutomatico]
   pull_request:
-    branches: [main]
+    branches: [TesteAutomatico]
 
 jobs:
   build:
