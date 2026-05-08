@@ -1,3 +1,6 @@
+#Code Smells:
+#Long Method/SRP/Acoplamento
+
 class GerenciadorDeVendas:
     def processar_venda(self, itens, cliente, metodo_pagamento):
         total = self._calcular_total(itens)
