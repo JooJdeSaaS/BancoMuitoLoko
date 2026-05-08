@@ -1,3 +1,6 @@
+#Code Smells:
+#Primitive Obsession
+
 from datetime import datetime
 
 class Hospede:
