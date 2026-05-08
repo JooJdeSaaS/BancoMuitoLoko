@@ -1,3 +1,6 @@
+#Code Smells:
+#Message Chains/Feature Envy
+
 class Pais:
     def __init__(self, nome):
         self.nome = nome
