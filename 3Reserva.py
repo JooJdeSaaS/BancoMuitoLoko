@@ -1,5 +1,5 @@
 #Code Smells:
-#Primitive Obsession
+#DeadCode
 
 from datetime import datetime
 
