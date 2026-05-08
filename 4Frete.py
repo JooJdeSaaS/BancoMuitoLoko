@@ -1,3 +1,6 @@
+#Code Smells:
+#Abuso de IfElse
+
 from abc import ABC, abstractmethod
 
 class Transporte(ABC):
