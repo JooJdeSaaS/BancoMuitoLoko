@@ -1,5 +1,5 @@
 #Code Smells:
-#LPL/Primitive Obsession
+#LPL
 
 class Endereco:
     def __init__(self, rua, numero, bairro, cidade, estado, cep):
