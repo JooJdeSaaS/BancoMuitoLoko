@@ -1,3 +1,6 @@
+#Code Smells:
+#Duplicated Code/Magic Numbers
+
 class ProcessadorFinanceiro:
     # Constantes para evitar números mágicos
     TAXA_CREDITO = 0.05
