@@ -34,7 +34,7 @@ class Reserva:
         print(f"De {self.checkin.strftime('%d/%m/%Y')} até {self.checkout.strftime('%d/%m/%Y')}")
         print(f"Total a pagar: R$ {total:.2f}")
 
-# Exemplo de uso:
+# Exemplo de uso
 hospede_1 = Hospede("João de Sá", "123.456.789-00", "joao@email.com")
 quarto_1 = Quarto(101, "Luxo", 250.0)
 reserva_1 = Reserva(hospede_1, quarto_1, "10/05/2026", "15/05/2026", cafe_da_manha=True)
