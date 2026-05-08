@@ -10,7 +10,6 @@ class ProcessadorFinanceiro:
         self._executar_processamento(valor, self.TAXA_DEBITO, "débito")
 
     def _executar_processamento(self, valor, taxa, tipo):
-        """Método privado que centraliza a lógica comum."""
         if valor <= 0:
             print("Valor inválido")
             return
