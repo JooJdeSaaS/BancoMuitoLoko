@@ -40,7 +40,7 @@ class Pedido:
         return self.cliente.obter_pais_cliente()
 
 
-# CÓDIGO REFORMULADO (Sem acesso profundo)
+# Sem acesso profundo
 def verificar_frete_internacional(pedido):
     pais_destino = pedido.obter_pais_destino()
 
