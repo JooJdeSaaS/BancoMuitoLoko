@@ -1,0 +1,3 @@
+JooJ;78945612332;11800.0;Abertura: R$ 10000.00|Depósito: + R$ 2000.00|Saque: - R$ 200.00
+Rodrigo;7894561233;90300.0;Abertura: R$ 90000.00|Depósito: + R$ 900.00|Saque: - R$ 600.00
+Pedro;32165498778;4995.0;Abertura: R$ 5.00|Depósito: + R$ 5000.00|Saque: - R$ 10.00
