@@ -1,0 +1,5 @@
+- Confidencialidade: O foco aqui é garantir que dados sensíveis de saúde não vazem. Além do 2FA, é essencial aplicar o Controle de Acesso Baseado em Função (RBAC), onde apenas o médico responsável e o próprio paciente possuam permissão de leitura sobre aquele registro específico.
+
+- Integridade: A maior preocupação é a fraude em receitas. Ao assinar digitalmente o documento, qualquer alteração posterior no arquivo (como mudar a dosagem de um medicamento) invalidará a assinatura, alertando as partes envolvidas.
+
+- Disponibilidade: Em um ambiente clínico, o tempo de inatividade pode ser crítico. Além das proteções de rede, ter uma arquitetura de nuvem escalável permite que o servidor lide com picos de tráfego (sejam eles legítimos ou ataques) de forma mais eficiente.
